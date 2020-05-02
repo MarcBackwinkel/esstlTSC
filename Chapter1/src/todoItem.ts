@@ -10,6 +10,6 @@ export class TodoItem {
     }
 
     public printDetails(): void {
-        
+        console.log();
     }
 }
