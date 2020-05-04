@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class TodoItem {
     //public is used in constructor to make clear concise constructor syntax is being used
     constructor(id, task, complete = false) {
-        this.complete = false;
+        this.id = id;
+        this.task = task;
+        this.complete = complete;
         //no statements required, following statements are done automatically
         //this.id = id;
         //this.task = task;

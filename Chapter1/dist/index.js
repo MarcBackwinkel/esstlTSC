@@ -9,7 +9,7 @@ let todos = [
     new todoItem_1.TodoItem(4, "Call Joe", true)
 ];
 let collection = new todoCollection_1.TodoCollection("Marc", todos);
-console.clear();
+//console.clear();
 console.log(`${collection.userName}'s Todo List`);
 let newId = collection.addTodo("Go for run");
 let todoItem = collection.getTodoById(newId);

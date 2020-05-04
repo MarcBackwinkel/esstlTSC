@@ -1,10 +1,9 @@
 export class TodoItem {
-    public id: number;
-    public task: string;
-    public complete: boolean = false;
 
     //public is used in constructor to make clear concise constructor syntax is being used
-    public constructor(id: number, task: string, complete: boolean = false){
+    constructor(public id: number, 
+                public task: string, 
+                public complete: boolean = false){
         
         //no statements required, following statements are done automatically
         //this.id = id;
