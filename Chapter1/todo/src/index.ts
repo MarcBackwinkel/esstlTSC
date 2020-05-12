@@ -29,8 +29,12 @@ enum Commands {
 
 function promptAdd(): void {
     console.clear();
-    inquirer.prompt({ type: "input", name: "add", message: "Enter Task:"})
-        .then(answers => {if (answers["add"] !== ""){
+    inquirer.prompt({ 
+        type: "input",
+        name: "add",
+        message: "Enter Task:"
+    }).then(answers => {
+        if (answers["add"] !== ""){
             collection.addTodo(answers["add"]);
         }
         promptUser();
@@ -39,16 +43,22 @@ function promptAdd(): void {
 
 function promptComplete(): void {
     console.clear();
-    inquirer.prompt({type: "checkbox", name: "complete", message: "Mark Tasks Complete",
-                    choices: collection.getTodoItems(showCompleted).map(item => 
-                        ({name: item.task, value: item.id, checked: item.complete}))
-                    }).then(answers => {
-                        let completedTasks = answers["complete"] as number[];
-                        collection.getTodoItems(true).forEach(item => 
-                            collection.markComplete(item.id,
-                                completedTasks.find(id => id === item.id) != undefined));
-                        promptUser();
-                    })
+    inquirer.prompt({
+        type: "checkbox",
+        name: "complete",
+        message: "Mark Tasks Complete",
+        choices: collection.getTodoItems(showCompleted).map(item => 
+                        ({name: item.task, 
+                            value: item.id, 
+                            checked: item.complete
+                        }))
+    }).then(answers => {
+        let completedTasks = answers["complete"] as number[];
+        collection.getTodoItems(showCompleted).forEach(item => 
+            collection.markComplete(item.id,
+            completedTasks.find(id => id === item.id) != undefined));
+        promptUser();
+    })
 }
 
 function promptUser(): void {
@@ -61,10 +71,6 @@ function promptUser(): void {
         choices: Object.values(Commands)
     }).then(answers => {
         switch (answers["command"]){
-            case Commands.Toggle:
-                showCompleted = !showCompleted;
-                promptUser();
-                break;
             case Commands.Add:
                 promptAdd();
                 break;
@@ -74,6 +80,10 @@ function promptUser(): void {
                 } else {
                     promptUser();
                 }
+                break;    
+            case Commands.Toggle:
+                showCompleted = !showCompleted;
+                promptUser();
                 break;
             case Commands.Purge:
                 collection.removeComplete();
