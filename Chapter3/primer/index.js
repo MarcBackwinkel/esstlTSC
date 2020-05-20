@@ -96,3 +96,68 @@ console.log(`Replaces: ${JSON.stringify(replacesProperties)}`);
 
 let {price, ...someProperties} = hat;
 console.log(`Selected : ${JSON.stringify(someProperties)}`);
+
+//Defining Getters and Setters
+let hat2 = {
+    name: "Hat",
+    _price: 100,
+    priceIncTax: 100 * 1.2,
+
+    set price(newPrice){
+        this._price = newPrice;
+        this.priceIncTax = this._price * 1.2;
+    },
+
+    get price(){
+        return this._price;
+    },
+
+    //This is a method!
+    //alternative: writeDetails: function(){...}
+    writeDetails(){
+        console.log(`${this.name}: ${this.price}, ${this.priceIncTax}`);
+    },
+
+    writeDetailsWithArrowFunction: () =>
+        console.log(`${this.name}: ${this.price}, ${this.priceIncTax}`)
+    
+};
+
+let boots2 = {
+    name: "Boots",
+    price: "100",
+
+    get priceIncTax(){
+        return Number(this.price * 1.2);
+    }
+};
+
+hat2.writeDetails();
+hat2.writeDetailsWithArrowFunction();
+hat2.price = 120;
+hat2.writeDetails();
+hat2.writeDetailsWithArrowFunction();
+
+console.log(`Boots2: ${boots2.price}, ${boots2.priceIncTax}`);
+boots2.price = 120;
+console.log(`Boots2: ${boots2.price}, ${boots2.priceIncTax}`);
+
+//Understanding the "this" keyword in stand-alone Functions
+function writeMessage(message){
+    console.log(`${this.greeting}, ${message}`);
+}
+greeting = "Hello";     //Caution: !== let greeting; here greeting is assigned to global object!
+writeMessage("It is sunny today.");                    //convention in JS to invoke a function
+writeMessage.call(global, "It is sunny today");        //standard way to invoke a function
+
+let myObject = {
+    greeting: "Hi, there",
+
+    writeMessage2(message){
+        console.log(`${this.greeting}, ${message}`);
+    }
+}
+myObject.writeMessage2("It is sunny today.");
+
+let myFunction = myObject.writeMessage2;
+myFunction("It is sunny today..");
