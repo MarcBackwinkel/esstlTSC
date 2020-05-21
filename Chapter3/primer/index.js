@@ -160,4 +160,24 @@ let myObject = {
 myObject.writeMessage2("It is sunny today.");
 
 let myFunction = myObject.writeMessage2;
-myFunction("It is sunny today..");
+myFunction("It is sunny today..");          //Focus on myObject is lost --> switch back to global object!
+
+//Changing the behaviour of the "this" keyword by "binding" the method to the object "myObject"
+console.log("-> myObject is bound now!");
+myObject.writeMessage2 = myObject.writeMessage2.bind(myObject);
+myObject.writeMessage2("It is sunny today.");
+
+myFunction = myObject.writeMessage2;
+myFunction("It is sunny today..");          //Focus on myObject is lost --> switch back to global object!
+
+//Understanding "this" in Arrow Functions
+myObject.getWriter = function(){
+    return (message) => console.log(`${this.greeting}, ${message}`);
+}
+
+let writer = myObject.getWriter;
+writer("It is raining today...");
+
+let standAlone = myObject.getWriter;
+let standAloneWriter = standAlone();
+standAloneWriter("It is sunny today...");
