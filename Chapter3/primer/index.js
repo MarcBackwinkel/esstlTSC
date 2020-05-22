@@ -115,11 +115,11 @@ let hat2 = {
     //This is a method!
     //alternative: writeDetails: function(){...}
     writeDetails(){
-        console.log(`${this.name}: ${this.price}, ${this.priceIncTax}`);
+        console.log(`normal Function: ${this.name}: ${this.price}, ${this.priceIncTax}`);
     },
 
     writeDetailsWithArrowFunction: () =>
-        console.log(`${this.name}: ${this.price}, ${this.priceIncTax}`)
+        console.log(`Arrow Function: ${this.name}: ${this.price}, ${this.priceIncTax}`)
     
 };
 
@@ -171,13 +171,16 @@ myFunction = myObject.writeMessage2;
 myFunction("It is sunny today..");          //Focus on myObject is lost --> switch back to global object!
 
 //Understanding "this" in Arrow Functions
-myObject.getWriter = function(){
+console.log("-> getWriter-Function comes into play...")
+//get Writer returns an arrow Function
+myObject.getWriter = function() {
     return (message) => console.log(`${this.greeting}, ${message}`);
 }
 
-let writer = myObject.getWriter;
-writer("It is raining today...");
+//double ()() as "myObject.getWriter()" receives the callback function; after that the arguments follow
+myObject.getWriter()("It is raining today...");
 
 let standAlone = myObject.getWriter;
+standAlone()("It is cloudy today...");
 let standAloneWriter = standAlone();
 standAloneWriter("It is sunny today...");
