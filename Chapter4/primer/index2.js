@@ -72,3 +72,52 @@ while (!result.done){
     console.log(result.value.toString());
     result = iterator.next();
 }
+
+//use of iterator can be awkward
+//better: use a generator (function*) that is invoked once and uses "yield"-keyword
+function* createProductIterator2(){
+    yield new Product("Hat_gnrtr", 100);
+    yield new Product("Boots_gnrtr", 100);
+    yield new Product("Umbrella_gnrtr", 23);
+}
+[...createProductIterator2()].forEach(p => console.log(p.toString()));
+
+//Defining Iterable Objects
+class GiftPack {
+    constructor(name, prod1, prod2, prod3){
+        this.name = name;
+        this.prod1 = prod1;
+        this.prod2 = prod2;
+        this.prod3 = prod3;
+    }
+
+    getTotalPrice(){
+        return [this.prod1, this.prod2, this.prod3]
+            .reduce((total, p) => total + p.price, 0);
+    }
+
+    /*
+    *getGenerator(){
+        yield this.prod1;
+        yield this.prod2;
+        yield this.prod3;
+    }
+    */
+   //more elegant the *getGenerator Function can be replaced by a default iterator method
+    *[Symbol.iterator](){
+        yield this.prod1;
+        yield this.prod2;
+        yield this.prod3;
+    }
+}
+
+let winter = new GiftPack("winter", new Product("Hat_Wntr", 100),
+    new Product("Boots_Wntr", 100), new Product("Gloves_Wntr", 23));
+
+console.log(`Total price: ${winter.getTotalPrice()}`);
+/*
+[...winter.getGenerator()].forEach(p => console.log(`Product: ${p}`));
+*/
+//replace the line above for the introduction of the default iterator method
+//lines 100 - 104 replaced by 107 - 111
+[...winter].forEach(p => console.log(`Product: ${p}`));
