@@ -1,6 +1,12 @@
 import calcTaxAndSum, { calculateTax } from "./tax";
 import { printDetails, applyDiscount } from "./utils";
 
+//for using modules:
+//npm install esm@3.2.22
+//node --require esm index3.js
+//or with nodemon:
+//npx nodemon --require esm index3.js
+
 //Using Javascript Collections
 class Product {
     constructor(name, price){
