@@ -1,4 +1,5 @@
-import calcTax from "./tax";
+import calcTaxAndSum, { calculateTax } from "./tax";
+import { printDetails, applyDiscount } from "./utils";
 
 //Using Javascript Collections
 class Product {
@@ -77,5 +78,17 @@ console.log(`Array length: ${productArray.length}`);
 console.log(`Set size: ${productSet.size}`);
 
 //Working with Modules, see import statement above
-let taxedPrice = calcTax(product.price);
+let productsImp = [new Product("Gloves", 23), new Product("Boots", 100)];
+let totalPrice = calcTaxAndSum(...productsImp.map(p => p.price));
+console.log(`Total Price: ${totalPrice.toFixed(2)}`);
+let taxedPrice = calculateTax(product.price);
 console.log(`Name: ${product.name}, Taxed Price: ${taxedPrice}`);
+
+//import of utils.js comes into play...
+let productUtils = new Product("Hat_utls", 100);
+applyDiscount(productUtils, 10);
+let taxedPriceUtils = calculateTax(productUtils.price);
+printDetails(productUtils);
+let productsUtils = [new Product("Gloves_utls", 23), new Product("Boots_utls", 100)];
+let totalPriceUtils = calcTaxAndSum(...productsUtils.map(p => p.price));
+console.log(`Total Price Utils: ${totalPriceUtils.toFixed(2)}`);
