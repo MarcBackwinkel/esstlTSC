@@ -1,4 +1,5 @@
-//the default keyword is used when the module contains a single feature
+//the default keyword is used when the module contains a single default feature
+//default can only be assigned ONCE!!!
 //export default function(price){
 //    return Number(price) * 1.2;
 //}
