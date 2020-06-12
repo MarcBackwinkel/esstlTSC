@@ -19,3 +19,4 @@ declare function calculateTaxUnion(amount: number, format: boolean): number | st
 declare let taxNumber: number;
 declare let taxString: string;
 declare let taxBoolean: boolean;
+declare let taxValue: string | number;
