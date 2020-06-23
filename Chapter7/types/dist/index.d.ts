@@ -20,3 +20,7 @@ declare let taxNumber: number;
 declare let taxString: string;
 declare let taxBoolean: boolean;
 declare let taxValue: string | number;
+declare function calculateTaxUnknown(amount: number, format: boolean): string | number;
+declare let taxValueUnknown: string | number;
+declare let newResultUnknown: unknown;
+declare let myNumberUnknown: number;

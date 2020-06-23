@@ -85,9 +85,20 @@ switch (typeof taxValue){
     case "string":
         console.log(`String Value: ${taxValue.charAt(0)}`);
         break;
+    //Never type
     default:
         let value: never = taxValue;
         console.log(`Unexpected type for value: ${value}`);
 }
 
-//Never Type
+//Using the unknown type
+function calculateTaxUnknown(amount: number, format: boolean): string | number {
+    const calcAmount = amount * 1.2;
+    return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxValueUnknown = calculateTaxUnknown(100, false);
+
+let newResultUnknown: unknown = calculateTaxUnknown(200, false);
+//let myNumberUnknown: number = newResultUnknown; --> not possible to assign unknown value to another type without tpye assertion
+let myNumberUnknown: number = newResultUnknown as number;
+console.log(`Number value: ${myNumberUnknown.toFixed(2)}`);
