@@ -3,8 +3,11 @@
         "target": "es2018",
         "outDir": "./dist",
         "rootDir": "./src",
-        "declaration": true     //generates file index.d.ts with shown type declarations of all variables and functions
+        "declaration": true      //generates file index.d.ts with shown type declarations of all variables and functions
         //,
         //"noImplicitAny": true
+        ,
+        "strictNullChecks": true //compiler will not allow null or undefined values
+                                 //no variables are allowed without assigning a value
     }
 }

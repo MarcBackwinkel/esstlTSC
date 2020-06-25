@@ -24,3 +24,7 @@ declare function calculateTaxUnknown(amount: number, format: boolean): string | 
 declare let taxValueUnknown: string | number;
 declare let newResultUnknown: unknown;
 declare let myNumberUnknown: number;
+declare function calculateTaxNull(amount: number, format: boolean): string | number | null;
+declare let taxValueNull: string | number | null;
+declare let taxValueNonNull: string | number;
+declare let taxValueNullAssigned: string | number | null;

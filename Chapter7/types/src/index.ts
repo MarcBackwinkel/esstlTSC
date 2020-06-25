@@ -87,18 +87,68 @@ switch (typeof taxValue){
         break;
     //Never type
     default:
-        let value: never = taxValue;
-        console.log(`Unexpected type for value: ${value}`);
+        if (taxValue === null){
+            console.log("Value is null");
+        } else {
+            let value: never = taxValue;
+            console.log(`Unexpected type for value: ${value}`);
+        }      
 }
 
 //Using the unknown type
 function calculateTaxUnknown(amount: number, format: boolean): string | number {
+
+    //if (amount === 0){
+        //return null;    // !!! null is own type which is not covered by string | number
+    //}
+
     const calcAmount = amount * 1.2;
     return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
 }
-let taxValueUnknown = calculateTaxUnknown(100, false);
+let taxValueUnknown: string | number = calculateTaxUnknown(100, false);
 
 let newResultUnknown: unknown = calculateTaxUnknown(200, false);
 //let myNumberUnknown: number = newResultUnknown; --> not possible to assign unknown value to another type without tpye assertion
 let myNumberUnknown: number = newResultUnknown as number;
 console.log(`Number value: ${myNumberUnknown.toFixed(2)}`);
+
+//Using Nullable Types
+function calculateTaxNull(amount: number, format: boolean): string | number | null {
+
+    if (amount === 0){
+        return null;    // !!! null is own type which is not covered by string | number
+    }
+
+    const calcAmount = amount * 1.2;
+    return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxValueNull: string | number | null = calculateTaxNull(0, false);
+console.log(`Number value: ${taxValueNull}`);
+
+//Removing null from a Union with an Assertion with "!" at the end
+let taxValueNonNull : string | number = calculateTaxNull(100, false)!;
+console.log(`Number value: ${taxValueNonNull}`);
+
+//Removing null from a Union with a Type Guard
+taxValueNull = calculateTaxNull(0, false);
+if (taxValueNull !== null){
+    let nonNullTaxValue: string | number = taxValue;
+    switch (typeof nonNullTaxValue){
+        case "number":
+            console.log(`Number Value: ${nonNullTaxValue.toFixed(2)}`);
+            break;
+        case "string":
+            console.log(`String Value: ${nonNullTaxValue.charAt(0)}`);
+            break;
+    }
+} else {
+    console.log("Value is not a string or a number.");
+}
+
+//Using the Definite Assignment Assertion
+//Definite Assignment Assertion is a "!" behind the var name --> value is not null!!!
+//not assigned variable will pass strictNullCheck with the Definite Assignment Assertion
+let taxValueNullAssigned!: string | number | null;
+//eval accepts a string and executes it as code
+eval("taxValueNullAssigned = calculateTaxNull(100, false)");
+console.log(`Number value: ${taxValueNullAssigned}`);
