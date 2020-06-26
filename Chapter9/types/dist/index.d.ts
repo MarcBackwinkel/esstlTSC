@@ -39,4 +39,3 @@ declare const enum Product4 {
     Umbrella = 2
 }
 declare let productValue4: Product4;
-declare let productName4: any;
