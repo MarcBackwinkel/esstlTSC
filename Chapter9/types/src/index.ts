@@ -124,4 +124,8 @@ if (typeof unionValue === "number"){
 const enum Product4 {Hat, Gloves, Umbrella};
 let productValue4 = Product4.Hat;
 //constant enums are very limited in it's usage --> see Book p. 205ff
-let productName4 = Product4[0];
+//therefore this is not possible: let productName4 = Product4[0];
+
+
+
+//LITERAL VALUE TYPES

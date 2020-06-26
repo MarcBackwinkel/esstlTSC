@@ -121,4 +121,5 @@ if (typeof unionValue === "number") {
 ;
 let productValue4 = 0 /* Hat */;
 //constant enums are very limited in it's usage --> see Book p. 205ff
-let productName4 = Product4[0];
+//therefore this is not possible: let productName4 = Product4[0];
+//LITERAL VALUE TYPES
