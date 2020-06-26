@@ -8,5 +8,7 @@ declare function calculateTaxNullParameters(amount: number | null, discount?: nu
 declare let taxValueNull: number | undefined;
 declare function calculateTaxTypeAnnoReturn(amount: number, discount?: number, ...extraFees: number[]): number;
 declare function writeValue(label: string, value: number): void;
-declare function calculateTaxOverloaded(amount: number | null): number | null;
+declare function calculateTaxOverloaded(amount: number): number;
+declare function calculateTaxOverloaded(amount: null): null;
 declare let taxValueNumberOrNull: number | null;
+declare let taxValueNumber: number;

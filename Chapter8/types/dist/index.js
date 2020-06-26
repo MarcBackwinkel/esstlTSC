@@ -74,14 +74,18 @@ function writeValue(label, value) {
     console.log(`${label}! ${value}`);
 }
 writeValue("Tax value", calculateTaxTypeAnnoReturn(100, 0));
-//Overloading Function Types
 function calculateTaxOverloaded(amount) {
     if (amount != null) {
         return amount * 1.2;
     }
     return null;
 }
+//refers to function header: function calculateTaxOverloaded(amount: number | null): number | null
 let taxValueNumberOrNull = calculateTaxOverloaded(100);
 if (typeof taxValueNumberOrNull === "number") {
     writeValue("Tax Value NoN", taxValueNumberOrNull);
 }
+//following refers to function calculateTaxOverloaded(amount: number): number;
+//it will throw an error when run with a null value
+let taxValueNumber = calculateTaxOverloaded(120);
+writeValue("Tax Value Mult Function Header: ", taxValueNumber);
